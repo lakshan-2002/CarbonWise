@@ -10,8 +10,13 @@ public class Business {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "industry")
     private String industry;
+
+    @Column(name = "location")
     private String location;
 
     public int getId() {
