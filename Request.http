@@ -1,4 +1,5 @@
 ### GET request to example server
+// Business Entity
 GET http://localhost:8080/businesses
 
 ###
@@ -25,6 +26,49 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8080/businesses/2
+
+###
+
+
+// User Entity
+GET http://localhost:8080/users
+
+###
+GET http://localhost:8080/users/2
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "email": "nimal123@gmail.com",
+  "password": "nimal123",
+  "role": "DevOps Engineer",
+  "business": {
+    "id": 1,
+    "name": "WSO2",
+    "industry": "Software",
+    "location": "Colombo"
+  }
+}
+###
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": 2,
+  "email": "nimal123@gmail.com",
+  "password": "nimal123",
+  "role": "Senior DevOps Engineer",
+  "business": {
+    "id": 1,
+    "name": "WSO2",
+    "industry": "Software",
+    "location": "Colombo"
+  }
+}
+###
+DELETE http://localhost:8080/users/2
 
 ###
 

@@ -17,15 +17,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(User user) {
+    public void addNewUser(User user) {
         userRepository.save(user);
     }
 
-    public List<User> getUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id) {
+    public User getUser(int id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
