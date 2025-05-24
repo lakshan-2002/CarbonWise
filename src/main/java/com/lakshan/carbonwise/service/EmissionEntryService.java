@@ -21,7 +21,7 @@ public class EmissionEntryService {
         emissionEntryRepository.save(emissionEntry);
     }
 
-    public List<EmissionEntry> getEmissionEntries() {
+    public List<EmissionEntry> getAllEmissionEntries() {
         return emissionEntryRepository.findAll();
     }
 
