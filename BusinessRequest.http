@@ -1,4 +1,5 @@
 ### GET request to example server
+
 // Business Entity
 GET http://localhost:8080/businesses
 
@@ -28,4 +29,5 @@ Content-Type: application/json
 DELETE http://localhost:8080/businesses/2
 
 ###
+
 
