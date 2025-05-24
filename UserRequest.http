@@ -1,35 +1,4 @@
 ### GET request to example server
-// Business Entity
-GET http://localhost:8080/businesses
-
-###
-GET http://localhost:8080/businesses/2
-
-###
-POST http://localhost:8080/businesses
-Content-Type: application/json
-
-{
-  "name": "Moose",
-  "industry": "Clothing",
-  "location": "Colombo"
-}
-###
-PUT http://localhost:8080/businesses
-Content-Type: application/json
-
-{
-  "id": 2,
-  "name": "Moose",
-  "industry": "Clothing",
-  "location": "Ja-Ela"
-}
-###
-DELETE http://localhost:8080/businesses/2
-
-###
-
-
 // User Entity
 GET http://localhost:8080/users
 
@@ -71,4 +40,3 @@ Content-Type: application/json
 DELETE http://localhost:8080/users/2
 
 ###
-
