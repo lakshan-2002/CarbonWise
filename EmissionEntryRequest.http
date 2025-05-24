@@ -1,0 +1,58 @@
+### GET request to example server
+// EmissionEntry Entity
+GET http://localhost:8080/emission_entries
+
+###
+GET http://localhost:8080/emission_entries/2
+
+###
+POST http://localhost:8080/emission_entries
+Content-Type: application/json
+
+{
+  "type": "Energy",
+  "data": "Office electricity consumption",
+  "amount": 1200.50,
+  "unit": "kWh",
+  "date": "2025-05-01",
+  "user": {
+    "id": 1,
+    "email": "lakshan.imantha@gmail.com",
+    "password": "lakshan02",
+    "role": "Software Engineer",
+    "business": {
+      "id": 1,
+      "name": "WSO2",
+      "industry": "Software",
+      "location": "Colombo"
+    }
+  }
+}
+###
+PUT http://localhost:8080/emission_entries
+Content-Type: application/json
+
+{
+  "id": 2,
+  "type": "Energy",
+  "data": "Office electricity consumption",
+  "amount": 1200.75,
+  "unit": "kWh",
+  "date": "2025-05-01",
+  "user": {
+    "id": 2,
+    "email": "nimal123@gmail.com",
+    "password": "nimal123",
+    "role": "Senior DevOps Engineer",
+    "business": {
+      "id": 1,
+      "name": "WSO2",
+      "industry": "Software",
+      "location": "Colombo"
+    }
+  }
+}
+###
+DELETE http://localhost:8080/emission_entries/2
+
+###
