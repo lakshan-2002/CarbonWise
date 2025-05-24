@@ -19,7 +19,7 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "business_id")
     private Business business;
 
