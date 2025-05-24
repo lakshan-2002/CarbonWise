@@ -1,4 +1,5 @@
 ### GET request to example server
+
 // User Entity
 GET http://localhost:8080/users
 
