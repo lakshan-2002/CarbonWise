@@ -13,7 +13,7 @@ Content-Type: application/json
 {
   "email": "nimal123@gmail.com",
   "password": "nimal123",
-  "role": "DevOps Engineer",
+  "role": "employee",
   "business": {
     "id": 1,
     "name": "WSO2",
@@ -29,7 +29,7 @@ Content-Type: application/json
   "id": 2,
   "email": "nimal123@gmail.com",
   "password": "nimal123",
-  "role": "Senior DevOps Engineer",
+  "role": "employee",
   "business": {
     "id": 1,
     "name": "WSO2",
