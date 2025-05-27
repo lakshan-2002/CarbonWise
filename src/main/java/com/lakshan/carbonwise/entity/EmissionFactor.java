@@ -51,4 +51,5 @@ public class EmissionFactor {
         this.co2eFactor = co2eFactor;
     }
 
+
 }
