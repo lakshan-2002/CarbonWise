@@ -50,4 +50,5 @@ public class EmissionFactor {
     public void setCo2eFactor(double co2eFactor) {
         this.co2eFactor = co2eFactor;
     }
+
 }
