@@ -19,6 +19,9 @@ public class Business {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "country")
+    private String country;
+
     public int getId() {
         return id;
     }
@@ -49,5 +52,13 @@ public class Business {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
