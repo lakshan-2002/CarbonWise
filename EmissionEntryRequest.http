@@ -3,7 +3,7 @@
 GET http://localhost:8080/emission_entries
 
 ###
-GET http://localhost:8080/emission_entries/2
+GET http://localhost:8080/emission_entries/8
 
 ###
 POST http://localhost:8080/emission_entries
@@ -11,20 +11,21 @@ Content-Type: application/json
 
 {
   "type": "Energy",
-  "data": "Office electricity consumption",
-  "amount": 1200.50,
-  "unit": "kWh",
-  "date": "2025-05-01",
+  "data": "Natural Gas",
+  "amount": 530.75,
+  "unit": "MMBtu",
+  "date": "2025-06-05",
   "user": {
     "id": 1,
     "email": "lakshan.imantha@gmail.com",
     "password": "lakshan02",
-    "role": "Software Engineer",
+    "role": "employee",
     "business": {
       "id": 1,
       "name": "WSO2",
       "industry": "Software",
-      "location": "Colombo"
+      "location": "Colombo",
+      "country": "Sri Lanka"
     }
   }
 }
@@ -33,26 +34,38 @@ PUT http://localhost:8080/emission_entries
 Content-Type: application/json
 
 {
-  "id": 2,
+  "id": 7,
   "type": "Energy",
   "data": "Office electricity consumption",
-  "amount": 1200.75,
+  "amount": 750.30,
   "unit": "kWh",
-  "date": "2025-05-01",
+  "date": "2025-06-01",
   "user": {
-    "id": 2,
-    "email": "nimal123@gmail.com",
-    "password": "nimal123",
-    "role": "Senior DevOps Engineer",
+    "id": 1,
+    "email": "lakshan.imantha@gmail.com",
+    "password": "lakshan02",
+    "role": "employee",
     "business": {
       "id": 1,
       "name": "WSO2",
       "industry": "Software",
-      "location": "Colombo"
+      "location": "Colombo",
+      "country": "Sri Lanka"
     }
   }
 }
 ###
-DELETE http://localhost:8080/emission_entries/2
+DELETE http://localhost:8080/emission_entries/6
 
+###
+POST https://www.carboninterface.com/api/v1/estimates
+Authorization: Bearer Carbon_API_Key
+Content-Type: application/json
+
+{
+    "type": "electricity",
+    "electricity_unit": "mwh",
+    "electricity_value": 42,
+    "country": "sl"
+}
 ###
