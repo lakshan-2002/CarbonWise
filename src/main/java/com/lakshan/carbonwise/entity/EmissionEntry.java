@@ -27,8 +27,8 @@ public class EmissionEntry {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "co2_factor")
-    private double co2Factor;
+    @Column(name = "co2_emission")
+    private double co2Emission;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -90,11 +90,11 @@ public class EmissionEntry {
         this.user = user;
     }
 
-    public double getCo2Factor() {
-        return co2Factor;
+    public double getCo2Emission() {
+        return co2Emission;
     }
 
-    public void setCo2Factor(double co2Factor) {
-        this.co2Factor = co2Factor;
+    public void setCo2Emission(double co2Emission) {
+        this.co2Emission = co2Emission;
     }
 }
