@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
-
 @Service
 public class CarbonEmissionService {
 
@@ -27,7 +25,7 @@ public class CarbonEmissionService {
 
     }
 
-    public double calculateEnergyEmissions(CarbonElectricityRequest carbonElectricityRequest) {
+    public double calculateElectricityEmissions(CarbonElectricityRequest carbonElectricityRequest) {
         String electricityApiUrl = "https://carbonsutra1.p.rapidapi.com/electricity_estimate";
 
         HttpHeaders headers = new HttpHeaders();
