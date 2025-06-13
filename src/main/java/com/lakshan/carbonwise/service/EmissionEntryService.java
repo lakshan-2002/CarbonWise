@@ -47,16 +47,10 @@ public class EmissionEntryService {
 
     public void updateEmissionEntry(EmissionEntry emissionEntry) throws RuntimeException {
         if (emissionEntryRepository.existsById(emissionEntry.getId())) {
-            if (emissionEntry.getType().equals("Energy")) {
-                var carbonElectricityRequest = carbonRequestMapper.toElectricityRequest(emissionEntry);
-                double co2Factor = carbonEmissionService.
-                        calculateElectricityEmissions(carbonElectricityRequest);
+            if(emissionEntry.getType().equals("Energy"))
+                carbonCalculationService.calculateEnergyEmissions(emissionEntry);
+            else if (emissionEntry.getType().equals("Transportation")) {
 
-                emissionEntry.setCo2Emission(co2Factor);
-            }
-            if (emissionEntry.getData().equals("Natural Gas")) {
-                double co2Emission = 53.06 * emissionEntry.getAmount();
-                emissionEntry.setCo2Emission(co2Emission);
             }
             emissionEntryRepository.save(emissionEntry);
         } else
