@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lakshan.carbonwise.config.CarbonSutraConfig;
 import com.lakshan.carbonwise.model.CarbonElectricityRequest;
+import com.lakshan.carbonwise.model.CarbonVehicleEstimateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -51,6 +52,33 @@ public class CarbonEmissionService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public double calculateVehicleEstimateEmissions(CarbonVehicleEstimateRequest vehicleEstimateRequest) {
+        String vehicleEstimateApiUrl = "https://carbonsutra1.p.rapidapi.com/vehicle_estimate_by_type";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
+        headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String requestBody = vehicleEstimateRequest.buildVehicleEstimateAPIRequest();
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        try {
+            String response = restTemplate.postForObject(
+                    vehicleEstimateApiUrl,
+                    requestEntity,
+                    String.class
+            );
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response);
+            return rootNode.get("data").get("co2e_kg").asDouble();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

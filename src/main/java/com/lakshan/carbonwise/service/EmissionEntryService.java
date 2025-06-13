@@ -19,7 +19,8 @@ public class EmissionEntryService {
     @Autowired
     public EmissionEntryService(EmissionEntryRepository emissionEntryRepository,
                                 CarbonEmissionService carbonEmissionService,
-                                CarbonRequestMapper carbonRequestMapper, CarbonCalculationService carbonCalculationService
+                                CarbonRequestMapper carbonRequestMapper,
+                                CarbonCalculationService carbonCalculationService
     ) {
         this.emissionEntryRepository = emissionEntryRepository;
         this.carbonEmissionService = carbonEmissionService;
@@ -28,10 +29,10 @@ public class EmissionEntryService {
     }
 
     public void addNewEmissionEntry(EmissionEntry emissionEntry) {
-        if(emissionEntry.getType().equals("Energy"))
+        if (emissionEntry.getType().equals("Energy"))
             carbonCalculationService.calculateEnergyEmissions(emissionEntry);
-        else if (emissionEntry.getType().equals("Transportation")) {
-
+        else if (emissionEntry.getType().equals("Transport")) {
+            carbonCalculationService.calculateTransportEmissions(emissionEntry);
         }
         emissionEntryRepository.save(emissionEntry);
     }
@@ -47,10 +48,10 @@ public class EmissionEntryService {
 
     public void updateEmissionEntry(EmissionEntry emissionEntry) throws RuntimeException {
         if (emissionEntryRepository.existsById(emissionEntry.getId())) {
-            if(emissionEntry.getType().equals("Energy"))
+            if (emissionEntry.getType().equals("Energy"))
                 carbonCalculationService.calculateEnergyEmissions(emissionEntry);
-            else if (emissionEntry.getType().equals("Transportation")) {
-
+            else if (emissionEntry.getType().equals("Transport")) {
+                carbonCalculationService.calculateTransportEmissions(emissionEntry);
             }
             emissionEntryRepository.save(emissionEntry);
         } else

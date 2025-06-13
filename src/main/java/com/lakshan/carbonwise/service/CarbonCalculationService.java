@@ -32,6 +32,14 @@ public class CarbonCalculationService {
     }
 
     public void calculateTransportEmissions(EmissionEntry emissionEntry){
+        if(emissionEntry.getData().equals("Bus-LocalAverage")) {
+            var vehicleEstimateRequest = carbonRequestMapper.toVehicleEstimateRequest(emissionEntry);
+            double co2Emission = carbonEmissionService.
+                    calculateVehicleEstimateEmissions(vehicleEstimateRequest);
+
+            emissionEntry.setCo2Emission(co2Emission);
+        }
+
 
     }
 }

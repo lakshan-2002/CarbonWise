@@ -15,12 +15,11 @@ public class CarbonRequestMapper {
         );
     }
 
-    public CarbonTransportationRequest toTransportRequest(EmissionEntry emissionEntry, String vehicleModelId) {
-        return new CarbonTransportationRequest(
-                "vehicle",
+    public CarbonVehicleEstimateRequest toVehicleEstimateRequest(EmissionEntry emissionEntry) {
+        return new CarbonVehicleEstimateRequest(
+                emissionEntry.getData(),
                 emissionEntry.getUnit(),
-                emissionEntry.getAmount(),
-                vehicleModelId
+                emissionEntry.getAmount()
         );
     }
 
