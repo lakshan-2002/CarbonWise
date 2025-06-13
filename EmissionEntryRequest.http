@@ -3,7 +3,7 @@
 GET http://localhost:8080/emission_entries
 
 ###
-GET http://localhost:8080/emission_entries/8
+GET http://localhost:8080/emission_entries/9
 
 ###
 POST http://localhost:8080/emission_entries
@@ -12,13 +12,13 @@ Content-Type: application/json
 {
   "type": "Energy",
   "data": "Natural Gas",
-  "amount": 530.75,
+  "amount": 250.75,
   "unit": "MMBtu",
-  "date": "2025-06-05",
+  "date": "2025-06-10",
   "user": {
-    "id": 1,
-    "email": "lakshan.imantha@gmail.com",
-    "password": "lakshan02",
+    "id": 2,
+    "email": "nimal123@gmail.com",
+    "password": "nimal123",
     "role": "employee",
     "business": {
       "id": 1,
