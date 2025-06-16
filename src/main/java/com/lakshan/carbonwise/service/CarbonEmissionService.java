@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lakshan.carbonwise.config.CarbonSutraConfig;
 import com.lakshan.carbonwise.model.CarbonElectricityRequest;
+import com.lakshan.carbonwise.model.CarbonFuelEstimateRequest;
 import com.lakshan.carbonwise.model.CarbonVehicleEstimateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -68,6 +69,33 @@ public class CarbonEmissionService {
         try {
             String response = restTemplate.postForObject(
                     vehicleEstimateApiUrl,
+                    requestEntity,
+                    String.class
+            );
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response);
+            return rootNode.get("data").get("co2e_kg").asDouble();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public double calculateFuelEstimateEmissions(CarbonFuelEstimateRequest fuelEstimateRequest) {
+        String fuelEstimateApiUrl = "https://carbonsutra1.p.rapidapi.com/fuel_estimate";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
+        headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String requestBody = fuelEstimateRequest.buildFuelEstimateRequest();
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        try {
+            String response = restTemplate.postForObject(
+                    fuelEstimateApiUrl,
                     requestEntity,
                     String.class
             );

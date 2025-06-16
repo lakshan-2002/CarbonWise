@@ -17,27 +17,34 @@ public class CarbonCalculationService {
         this.carbonEmissionService = carbonEmissionService;
     }
 
-    public void calculateEnergyEmissions(EmissionEntry emissionEntry){
+    public void calculateEnergyEmissions(EmissionEntry emissionEntry) {
         if (emissionEntry.getData().equals("Electricity Usage")) {
             var carbonElectricityRequest = carbonRequestMapper.toElectricityRequest(emissionEntry);
-            double co2Emission = carbonEmissionService.
+            double electricityEmissions = carbonEmissionService.
                     calculateElectricityEmissions(carbonElectricityRequest);
 
-            emissionEntry.setCo2Emission(co2Emission);
+            emissionEntry.setCo2Emission(electricityEmissions);
         }
         if (emissionEntry.getData().equals("Natural Gas")) {
-            double co2Emission = 53.06 * emissionEntry.getAmount();
-            emissionEntry.setCo2Emission(co2Emission);
+            double gasEmissions = 53.06 * emissionEntry.getAmount();
+            emissionEntry.setCo2Emission(gasEmissions);
         }
     }
 
-    public void calculateTransportEmissions(EmissionEntry emissionEntry){
-        if(emissionEntry.getData().equals("Bus-LocalAverage")) {
+    public void calculateTransportEmissions(EmissionEntry emissionEntry) {
+        if (emissionEntry.getData().equals("Employee Commuting")) {
             var vehicleEstimateRequest = carbonRequestMapper.toVehicleEstimateRequest(emissionEntry);
-            double co2Emission = carbonEmissionService.
+            double vehicleEmissions = carbonEmissionService.
                     calculateVehicleEstimateEmissions(vehicleEstimateRequest);
 
-            emissionEntry.setCo2Emission(co2Emission);
+            emissionEntry.setCo2Emission(vehicleEmissions);
+        }
+        if (emissionEntry.getData().equals("Fuel Usage")) {
+            var fuelEstimateRequest = carbonRequestMapper.toFuelEstimateRequest(emissionEntry);
+            double fuelEmissions = carbonEmissionService.
+                    calculateFuelEstimateEmissions(fuelEstimateRequest);
+
+            emissionEntry.setCo2Emission(fuelEmissions);
         }
 
 

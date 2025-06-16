@@ -12,19 +12,13 @@ import java.util.List;
 public class EmissionEntryService {
 
     private final EmissionEntryRepository emissionEntryRepository;
-    private final CarbonEmissionService carbonEmissionService;
-    private final CarbonRequestMapper carbonRequestMapper;
     private final CarbonCalculationService carbonCalculationService;
 
     @Autowired
     public EmissionEntryService(EmissionEntryRepository emissionEntryRepository,
-                                CarbonEmissionService carbonEmissionService,
-                                CarbonRequestMapper carbonRequestMapper,
                                 CarbonCalculationService carbonCalculationService
     ) {
         this.emissionEntryRepository = emissionEntryRepository;
-        this.carbonEmissionService = carbonEmissionService;
-        this.carbonRequestMapper = carbonRequestMapper;
         this.carbonCalculationService = carbonCalculationService;
     }
 
