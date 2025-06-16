@@ -17,7 +17,7 @@ public class CarbonRequestMapper {
 
     public CarbonVehicleEstimateRequest toVehicleEstimateRequest(EmissionEntry emissionEntry) {
         return new CarbonVehicleEstimateRequest(
-                emissionEntry.getData(),
+                emissionEntry.getMethod(),
                 emissionEntry.getUnit(),
                 emissionEntry.getAmount()
         );
@@ -25,7 +25,7 @@ public class CarbonRequestMapper {
     public CarbonFuelEstimateRequest toFuelEstimateRequest(EmissionEntry emissionEntry) {
         return new CarbonFuelEstimateRequest(
                 emissionEntry.getType().toLowerCase(),
-                emissionEntry.getData(),
+                emissionEntry.getMethod(),
                 emissionEntry.getUnit(),
                 emissionEntry.getAmount()
         );

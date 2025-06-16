@@ -18,6 +18,9 @@ public class EmissionEntry {
     @Column(name = "data")
     private String data;
 
+    @Column(name = "method")
+    private String method;
+
     @Column(name = "amount")
     private double amount;
 
@@ -56,6 +59,14 @@ public class EmissionEntry {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public double getAmount() {
