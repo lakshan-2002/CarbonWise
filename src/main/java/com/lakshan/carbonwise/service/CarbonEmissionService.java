@@ -28,20 +28,20 @@ public class CarbonEmissionService {
 
     }
 
-    public double calculateElectricityEmissions(CarbonElectricityRequest carbonElectricityRequest) {
-        String electricityApiUrl = "https://carbonsutra1.p.rapidapi.com/electricity_estimate";
-
+    private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
         headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
         headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
+    }
 
-        String requestBody = carbonElectricityRequest.buildElectricityAPIRequest();
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+    private double fetchCarbonSutraEmission(String apiUrl, String requestBody) {
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, getHttpHeaders());
 
         try {
             String response = restTemplate.postForObject(
-                    electricityApiUrl,
+                    apiUrl,
                     requestEntity,
                     String.class
             );
@@ -53,89 +53,36 @@ public class CarbonEmissionService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public double calculateElectricityEmissions(CarbonElectricityRequest carbonElectricityRequest) {
+        String electricityApiUrl = "https://carbonsutra1.p.rapidapi.com/electricity_estimate";
+
+        String electricityRequestBody = carbonElectricityRequest.buildElectricityAPIRequest();
+        return fetchCarbonSutraEmission(electricityApiUrl, electricityRequestBody);
 
     }
 
     public double calculateVehicleEstimateEmissions(CarbonVehicleEstimateRequest vehicleEstimateRequest) {
         String vehicleEstimateApiUrl = "https://carbonsutra1.p.rapidapi.com/vehicle_estimate_by_type";
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
-        headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String requestBody = vehicleEstimateRequest.buildVehicleEstimateAPIRequest();
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-        try {
-            String response = restTemplate.postForObject(
-                    vehicleEstimateApiUrl,
-                    requestEntity,
-                    String.class
-            );
-
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(response);
-            return rootNode.get("data").get("co2e_kg").asDouble();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String vehicleEstimateRequestBody = vehicleEstimateRequest.buildVehicleEstimateAPIRequest();
+        return fetchCarbonSutraEmission(vehicleEstimateApiUrl, vehicleEstimateRequestBody);
     }
 
     public double calculateFuelEstimateEmissions(CarbonFuelEstimateRequest fuelEstimateRequest) {
         String fuelEstimateApiUrl = "https://carbonsutra1.p.rapidapi.com/fuel_estimate";
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
-        headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String requestBody = fuelEstimateRequest.buildFuelEstimateRequest();
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-        try {
-            String response = restTemplate.postForObject(
-                    fuelEstimateApiUrl,
-                    requestEntity,
-                    String.class
-            );
-
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(response);
-            return rootNode.get("data").get("co2e_kg").asDouble();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String fuelEstimateRequestBody = fuelEstimateRequest.buildFuelEstimateRequest();
+        return fetchCarbonSutraEmission(fuelEstimateApiUrl, fuelEstimateRequestBody);
     }
 
     public double calculateBusinessAirTravelEmissions(CarbonBusinessAirTravelRequest businessAirTravelRequest) {
-            String businessAirTravelApiUrl = "https://carbonsutra1.p.rapidapi.com/flight_estimate";
+        String businessAirTravelApiUrl = "https://carbonsutra1.p.rapidapi.com/flight_estimate";
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
-            headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            String requestBody = businessAirTravelRequest.buildBusinessAirTravelRequest();
-            HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-            try {
-                String response = restTemplate.postForObject(
-                        businessAirTravelApiUrl,
-                        requestEntity,
-                        String.class
-                );
-
-                ObjectMapper mapper = new ObjectMapper();
-                JsonNode rootNode = mapper.readTree(response);
-                return rootNode.get("data").get("co2e_kg").asDouble();
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        String flightRequestBody = businessAirTravelRequest.buildBusinessAirTravelRequest();
+        return fetchCarbonSutraEmission(businessAirTravelApiUrl, flightRequestBody);
+    }
 
 
 }
