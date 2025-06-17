@@ -21,6 +21,15 @@ public class EmissionEntry {
     @Column(name = "method")
     private String method;
 
+    @Column(name = "iata_airport_from")
+    private String iataAirportFrom;
+
+    @Column(name = "iata_airport_to")
+    private String iataAirportTo;
+
+    @Column(name = "number_of_passengers")
+    private int numberOfPassengers;
+
     @Column(name = "amount")
     private double amount;
 
@@ -67,6 +76,30 @@ public class EmissionEntry {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getIataAirportFrom() {
+        return iataAirportFrom;
+    }
+
+    public void setIataAirportFrom(String iataAirportFrom) {
+        this.iataAirportFrom = iataAirportFrom;
+    }
+
+    public String getIataAirportTo() {
+        return iataAirportTo;
+    }
+
+    public void setIataAirportTo(String iataAirportTo) {
+        this.iataAirportTo = iataAirportTo;
+    }
+
+    public int getNumberOfPassengers() {
+        return numberOfPassengers;
+    }
+
+    public void setNumberOfPassengers(int numberOfPassengers) {
+        this.numberOfPassengers = numberOfPassengers;
     }
 
     public double getAmount() {
