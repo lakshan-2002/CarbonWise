@@ -39,21 +39,4 @@ public class CarbonRequestMapper {
         );
     }
 
-    public CarbonWasteRequest toWasteRequest(EmissionEntry emissionEntry, String wasteType) {
-        return new CarbonWasteRequest(
-                "waste",
-                wasteType,
-                emissionEntry.getUnit(),
-                emissionEntry.getAmount()
-        );
-    }
-
-    public CarbonOtherRequest toOtherRequest(EmissionEntry emissionEntry) {
-        return new CarbonOtherRequest(
-                "custom",
-                emissionEntry.getData(),
-                emissionEntry.getAmount(),
-                emissionEntry.getUnit()
-        );
-    }
 }
