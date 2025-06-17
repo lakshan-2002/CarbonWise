@@ -31,6 +31,14 @@ public class CarbonRequestMapper {
         );
     }
 
+    public CarbonBusinessAirTravelRequest toBusinessAirTravelRequest(EmissionEntry emissionEntry) {
+        return new CarbonBusinessAirTravelRequest(
+                emissionEntry.getIataAirportFrom(),
+                emissionEntry.getIataAirportTo(),
+                emissionEntry.getNumberOfPassengers()
+        );
+    }
+
     public CarbonWasteRequest toWasteRequest(EmissionEntry emissionEntry, String wasteType) {
         return new CarbonWasteRequest(
                 "waste",

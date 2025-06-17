@@ -25,9 +25,9 @@ public class EmissionEntryService {
     public void addNewEmissionEntry(EmissionEntry emissionEntry) {
         if (emissionEntry.getType().equals("Energy"))
             carbonCalculationService.calculateEnergyEmissions(emissionEntry);
-        else if (emissionEntry.getType().equals("Transport")) {
+        else if (emissionEntry.getType().equals("Transport"))
             carbonCalculationService.calculateTransportEmissions(emissionEntry);
-        }
+
         emissionEntryRepository.save(emissionEntry);
     }
 

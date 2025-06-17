@@ -3,6 +3,7 @@ package com.lakshan.carbonwise.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lakshan.carbonwise.config.CarbonSutraConfig;
+import com.lakshan.carbonwise.model.CarbonBusinessAirTravelRequest;
 import com.lakshan.carbonwise.model.CarbonElectricityRequest;
 import com.lakshan.carbonwise.model.CarbonFuelEstimateRequest;
 import com.lakshan.carbonwise.model.CarbonVehicleEstimateRequest;
@@ -108,6 +109,33 @@ public class CarbonEmissionService {
             throw new RuntimeException(e);
         }
     }
+
+    public double calculateBusinessAirTravelEmissions(CarbonBusinessAirTravelRequest businessAirTravelRequest) {
+            String businessAirTravelApiUrl = "https://carbonsutra1.p.rapidapi.com/flight_estimate";
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + carbonSutraConfig.getBearerAPIKey());
+            headers.set("X-RapidAPI-Key", carbonSutraConfig.getRapidAPIKey());
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            String requestBody = businessAirTravelRequest.buildBusinessAirTravelRequest();
+            HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+
+            try {
+                String response = restTemplate.postForObject(
+                        businessAirTravelApiUrl,
+                        requestEntity,
+                        String.class
+                );
+
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode rootNode = mapper.readTree(response);
+                return rootNode.get("data").get("co2e_kg").asDouble();
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 
 }

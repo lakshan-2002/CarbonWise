@@ -46,6 +46,13 @@ public class CarbonCalculationService {
 
             emissionEntry.setCo2Emission(fuelEmissions);
         }
+        if (emissionEntry.getData().equals("Business Air Travel")){
+            var airTravelRequest = carbonRequestMapper.toBusinessAirTravelRequest(emissionEntry);
+            double flightEmissions = carbonEmissionService.
+                    calculateBusinessAirTravelEmissions(airTravelRequest);
+
+            emissionEntry.setCo2Emission(flightEmissions);
+        }
 
 
     }
