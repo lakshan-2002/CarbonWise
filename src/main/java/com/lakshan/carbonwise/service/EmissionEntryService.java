@@ -23,11 +23,12 @@ public class EmissionEntryService {
     }
 
     public void addNewEmissionEntry(EmissionEntry emissionEntry) {
-        if (emissionEntry.getType().equals("Energy"))
-            carbonCalculationService.calculateEnergyEmissions(emissionEntry);
-        else if (emissionEntry.getType().equals("Transport"))
-            carbonCalculationService.calculateTransportEmissions(emissionEntry);
-
+//        if (emissionEntry.getType().equals("Energy"))
+//            carbonCalculationService.calculateEnergyEmissions(emissionEntry);
+//        else if (emissionEntry.getType().equals("Transport"))
+//            carbonCalculationService.calculateTransportEmissions(emissionEntry);
+        double emission = carbonCalculationService.calculateEmission(emissionEntry);
+        emissionEntry.setCo2Emission(emission);
         emissionEntryRepository.save(emissionEntry);
     }
 

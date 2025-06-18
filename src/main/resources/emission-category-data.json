@@ -1,0 +1,4 @@
+{
+  "calculated": { "Natural Gas": 53.06, "Plastic": 75 },
+  "endpoint": ["Electricity Usage", "Employee Commuting", "Fuel Usage", "Business Air Travel"]
+}
