@@ -1,7 +1,6 @@
 package com.lakshan.carbonwise.service;
 
 import com.lakshan.carbonwise.entity.EmissionEntry;
-import com.lakshan.carbonwise.model.CarbonRequestMapper;
 import com.lakshan.carbonwise.repository.EmissionEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +22,8 @@ public class EmissionEntryService {
     }
 
     public void addNewEmissionEntry(EmissionEntry emissionEntry) {
-//        if (emissionEntry.getType().equals("Energy"))
-//            carbonCalculationService.calculateEnergyEmissions(emissionEntry);
-//        else if (emissionEntry.getType().equals("Transport"))
-//            carbonCalculationService.calculateTransportEmissions(emissionEntry);
-        double emission = carbonCalculationService.calculateEmission(emissionEntry);
-        emissionEntry.setCo2Emission(emission);
+        double co2Emission = carbonCalculationService.calculateEmission(emissionEntry);
+        emissionEntry.setCo2Emission(co2Emission);
         emissionEntryRepository.save(emissionEntry);
     }
 
