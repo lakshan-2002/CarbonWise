@@ -29,9 +29,8 @@ public class CarbonCalculationService {
 
     public double calculateEmission(EmissionEntry emissionEntry) throws RuntimeException {
         String key = emissionEntry.getData();
-        if (!emissionEntry.getMethod().isEmpty())
+        if (emissionEntry.getMethod() != null)
             key += ";" + emissionEntry.getMethod();
-
         if (emissionCategory.calculated.containsKey(key))
             return emissionCategory.calculated.get(key) * emissionEntry.getAmount();
         else if (emissionCategory.endpoint.contains(key)) {
