@@ -6,10 +6,3 @@ services:
     runtime: manual
     buildCommand: ./mvnw clean package
     startCommand: java -jar CarbonWise.jar
-    envVars:
-      - key: Bearer_API_Key
-        fromEnvVar: Bearer_API_Key
-      - key: Rapid_API_Key
-        fromEnvVar: Rapid_API_Key
-    autoDeploy: true
-
