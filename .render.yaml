@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: CarbonWise-backend
+    name: carbonwise-backend
     env: java
     plan: free
     runtime: manual
