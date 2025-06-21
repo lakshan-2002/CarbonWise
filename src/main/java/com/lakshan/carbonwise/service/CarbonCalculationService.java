@@ -23,8 +23,10 @@ public class CarbonCalculationService {
         this.carbonEmissionService = carbonEmissionService;
 
         ObjectMapper mapper = new ObjectMapper();
-        File file = new ClassPathResource("emission-category-data.json").getFile();
-        emissionCategory = mapper.readValue(file, EmissionCategory.class);
+        try (var inputStream = new ClassPathResource("emission-category-data.json").getInputStream()) {
+            emissionCategory = mapper.readValue(inputStream, EmissionCategory.class);
+        }
+
     }
 
     public double calculateEmission(EmissionEntry emissionEntry) throws RuntimeException {
