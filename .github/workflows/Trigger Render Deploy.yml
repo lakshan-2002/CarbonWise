@@ -1,0 +1,15 @@
+name: Trigger Render Deploy
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  trigger-deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy hook
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
