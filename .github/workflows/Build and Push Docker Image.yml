@@ -23,14 +23,7 @@ jobs:
 
       - name: Build and tag image
         run: |
-          docker build \
-            --build-arg Database_Host=${{ secrets.Database_Host }} \
-            --build-arg Database_Username=${{ secrets.Database_Username }} \
-            --build-arg Database_Password=${{ secrets.Database_Password }} \
-            --build-arg Bearer_API_Key=${{ secrets.Bearer_API_Key }} \
-            --build-arg Rapid_API_Key=${{ secrets.Rapid_API_Key }} \
-            --build-arg Open_AI_Key=${{ secrets.Open_AI_Key }} \
-            -t ${{ env.Image_Path }} .
+          docker build -t ${{ env.Image_Path }} .
 
       - name: Push image
         run: |
