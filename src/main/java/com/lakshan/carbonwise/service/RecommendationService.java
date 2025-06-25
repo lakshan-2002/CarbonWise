@@ -40,8 +40,8 @@ public class RecommendationService {
     public void addNewRecommendation(AiRecommendationDTO aiRecommendationDTO,
                                      User user,
                                      EmissionEntry emissionEntry) {
-        Recommendation recommendation = new Recommendation();
 
+        Recommendation recommendation = new Recommendation();
         recommendation.setUser(user);
         recommendation.setEmissionEntry(emissionEntry);
         recommendation.setTitle(aiRecommendationDTO.getTitle());
