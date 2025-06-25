@@ -7,13 +7,14 @@ GET http://localhost:8080/businesses
 GET http://localhost:8080/businesses/2
 
 ###
-POST http://localhost:8080/businesses
+POST https://carbonwise-backend-1.onrender.com/businesses
 Content-Type: application/json
 
 {
   "name": "Moose",
   "industry": "Clothing",
-  "location": "Colombo"
+  "location": "Colombo",
+  "country": "Sri Lanka"
 }
 ###
 PUT http://localhost:8080/businesses

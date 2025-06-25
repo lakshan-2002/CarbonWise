@@ -2,6 +2,7 @@ package com.lakshan.carbonwise.controller;
 
 import com.lakshan.carbonwise.entity.User;
 import com.lakshan.carbonwise.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,16 @@ public class UserController {
     @PostMapping
     public void addUser(@RequestBody User user) {
         userService.addNewUser(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user){
+        user = userService.getUserByEmail(user.getEmail());
+
+        if (user != null && user.getPassword().equals(user.getPassword()))
+            return ResponseEntity.ok(user);
+        else
+            return ResponseEntity.status(401).body("Invalid email or password");
     }
 
     @GetMapping("{id}")
