@@ -33,9 +33,6 @@ public class Recommendation {
     @Column(name = "implementation_difficulty")
     private String implementationDifficulty;
 
-    @Column(name = "status")
-    private String status;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -109,14 +106,6 @@ public class Recommendation {
 
     public void setImplementationDifficulty(String implementationDifficulty) {
         this.implementationDifficulty = implementationDifficulty;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public User getUser() {
