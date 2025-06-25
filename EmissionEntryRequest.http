@@ -10,11 +10,12 @@ POST http://localhost:8080/emission_entries
 Content-Type: application/json
 
 {
-  "type": "Energy",
-  "data": "Natural Gas",
-  "amount": 250.75,
-  "unit": "MMBtu",
-  "date": "2025-06-10",
+  "type": "Transport",
+  "data": "Fuel Usage",
+  "method": "Regular Petrol",
+  "amount": 250,
+  "unit": "litre",
+  "date": "2025-06-18",
   "user": {
     "id": 2,
     "email": "nimal123@gmail.com",
@@ -55,7 +56,7 @@ Content-Type: application/json
   }
 }
 ###
-DELETE http://localhost:8080/emission_entries/6
+DELETE http://localhost:8080/emission_entries/49
 
 ###
 POST https://www.carboninterface.com/api/v1/estimates
