@@ -44,7 +44,7 @@ public class AiRecommendationDTO {
             return objectMapper.readValue(jsonResponse, new TypeReference<List<AiRecommendationDTO>>() {
             });
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse recommendations");
+            throw new RuntimeException("Failed to parse recommendations" + e.getMessage());
         }
 
     }
