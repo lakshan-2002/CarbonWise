@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -31,7 +30,7 @@ public class CarbonCalculationService {
 
     public double calculateEmission(EmissionEntry emissionEntry) throws RuntimeException {
         String key = emissionEntry.getData();
-        if (emissionEntry.getMethod() != null)
+        if (emissionEntry.getType().equals("Material") && emissionEntry.getMethod() != null)
             key += ";" + emissionEntry.getMethod();
         if (emissionCategory.calculated.containsKey(key))
             return emissionCategory.calculated.get(key) * emissionEntry.getAmount();
