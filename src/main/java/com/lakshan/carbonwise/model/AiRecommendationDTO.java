@@ -1,16 +1,12 @@
 package com.lakshan.carbonwise.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lakshan.carbonwise.entity.Recommendation;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Data
 @AllArgsConstructor
@@ -19,34 +15,36 @@ import java.util.regex.Pattern;
 @Setter
 @Component
 public class AiRecommendationDTO {
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("category")
     private String category;
+
+    @JsonProperty("carbon_impact_tCO2e_per_year")
     private double carbonImpact;
+
+    @JsonProperty("financial_impact_dollars_per_year")
     private double financialImpact;
+
+    @JsonProperty("implementation_cost_dollars")
     private double implementationCost;
+
+    @JsonProperty("payback_period_years")
     private String paybackPeriod;
+
+    @JsonProperty("implementation_difficulty")
     private String implementationDifficulty;
 
 
     public List<AiRecommendationDTO> parseRecommendations(String jsonResponse) {
         try {
-            Pattern pattern = Pattern.compile("```json\\s*\\{.*?\\}\\s*```", Pattern.DOTALL);
-            Matcher matcher = pattern.matcher(jsonResponse);
-
-            if (matcher.find()) {
-                String jsonBlock = matcher.group();
-                String cleanedJson = jsonBlock.replaceAll("```json", "").replaceAll("```", "").trim();
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode root = objectMapper.readTree(cleanedJson);
-
-                JsonNode actions = root.path("actions");
-                return objectMapper.readValue(actions.toString(), new TypeReference<List<AiRecommendationDTO>>() {});
-            } else {
-                throw new RuntimeException("Could not extract valid JSON block from response.");
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(jsonResponse, new TypeReference<List<AiRecommendationDTO>>() {
+            });
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse recommendations: " + jsonResponse);
+            throw new RuntimeException("Failed to parse recommendations");
         }
 
     }
