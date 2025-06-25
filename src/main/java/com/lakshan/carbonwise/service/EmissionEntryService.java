@@ -45,6 +45,7 @@ public class EmissionEntryService {
                 emissionEntry.getData(),
                 emissionEntry.getCo2Emission()
         );
+
         recommendationService.saveRecommendations(prompt, emissionEntry.getUser(), emissionEntry);
 
     }
