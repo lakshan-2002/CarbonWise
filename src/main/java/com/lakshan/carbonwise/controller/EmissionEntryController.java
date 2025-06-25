@@ -33,6 +33,11 @@ public class EmissionEntryController {
         return emissionEntryService.getEmissionEntryById(id);
     }
 
+    @GetMapping("/getUserById/{userId}")
+    public List<EmissionEntry> getEmissionEntryByUserId(@PathVariable int userId) {
+        return emissionEntryService.getEmissionEntryByUserId(userId);
+    }
+
     @PutMapping
     public void updateEmissionEntry(@RequestBody EmissionEntry emissionEntry) {
         emissionEntryService.updateEmissionEntry(emissionEntry);

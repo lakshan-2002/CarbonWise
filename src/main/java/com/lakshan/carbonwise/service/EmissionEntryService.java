@@ -91,4 +91,8 @@ public class EmissionEntryService {
         else
             throw new RuntimeException("No emission entry found with id: " + id);
     }
+
+    public List<EmissionEntry> getEmissionEntryByUserId(int userId) {
+        return emissionEntryRepository.findByUserId(userId);
+    }
 }
