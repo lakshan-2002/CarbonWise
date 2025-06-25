@@ -3,7 +3,7 @@
 GET http://localhost:8080/emission_entries
 
 ###
-GET http://localhost:8080/emission_entries/9
+GET http://localhost:8080/emission_entries/getUserById/1
 
 ###
 POST http://localhost:8080/emission_entries
