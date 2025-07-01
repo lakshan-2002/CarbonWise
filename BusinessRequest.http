@@ -7,24 +7,25 @@ GET http://localhost:8080/businesses
 GET http://localhost:8080/businesses/2
 
 ###
-POST https://carbonwise-backend-1.onrender.com/businesses
+POST http://localhost:8080/businesses/addBusiness
 Content-Type: application/json
 
 {
-  "name": "Moose",
-  "industry": "Clothing",
+  "name": "MAGA",
+  "industry": "Construction",
   "location": "Colombo",
   "country": "Sri Lanka"
 }
 ###
-PUT http://localhost:8080/businesses
+PUT http://localhost:8080/businesses/updateBusiness
 Content-Type: application/json
 
 {
-  "id": 2,
-  "name": "Moose",
-  "industry": "Clothing",
-  "location": "Ja-Ela"
+  "id": 3,
+  "name": "MAGA",
+  "industry": "Construction",
+  "location": "Nawala",
+  "country": "Sri lanka"
 }
 ###
 DELETE http://localhost:8080/businesses/2
