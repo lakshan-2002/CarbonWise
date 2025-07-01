@@ -3,6 +3,8 @@ package com.lakshan.carbonwise.controller;
 import com.lakshan.carbonwise.entity.Business;
 import com.lakshan.carbonwise.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class BusinessController {
     }
 
     @PostMapping("/addBusiness")
-    public void addBusiness(@RequestBody Business business) {
+    public ResponseEntity<Business> addBusiness(@RequestBody Business business) {
         businessService.addNewBusiness(business);
+        return new ResponseEntity<>(business, HttpStatus.OK);
     }
 
     @GetMapping("{id}")

@@ -3,6 +3,7 @@ package com.lakshan.carbonwise.service;
 import com.lakshan.carbonwise.entity.Business;
 import com.lakshan.carbonwise.repository.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
