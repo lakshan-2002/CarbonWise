@@ -19,7 +19,7 @@ public class BusinessController {
         this.businessService = businessService;
     }
 
-    @PostMapping
+    @PostMapping("/addBusiness")
     public void addBusiness(@RequestBody Business business) {
         businessService.addNewBusiness(business);
     }
@@ -34,7 +34,7 @@ public class BusinessController {
         return businessService.getAllBusinesses();
     }
 
-    @PutMapping
+    @PutMapping("/updateBusiness")
     public void updateBusiness(@RequestBody Business business) {
         businessService.updateBusiness(business);
     }

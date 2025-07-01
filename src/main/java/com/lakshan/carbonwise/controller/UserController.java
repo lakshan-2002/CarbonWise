@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
         userService.addNewUser(user);
     }
@@ -50,7 +50,7 @@ public class UserController {
        return userService.getAllUsers();
     }
 
-    @PutMapping
+    @PutMapping("/updateUser")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }

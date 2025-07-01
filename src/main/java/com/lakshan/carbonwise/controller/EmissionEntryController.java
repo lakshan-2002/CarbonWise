@@ -19,7 +19,7 @@ public class EmissionEntryController {
         this.emissionEntryService = emissionEntryService;
     }
 
-    @PostMapping
+    @PostMapping("/addEmissionEntry")
     public void addEmissionEntry(@RequestBody EmissionEntry emissionEntry) {
         emissionEntryService.addNewEmissionEntry(emissionEntry);
     }
@@ -34,12 +34,12 @@ public class EmissionEntryController {
         return emissionEntryService.getEmissionEntryById(id);
     }
 
-    @GetMapping("/getUserById/{userId}")
+    @GetMapping("/getEmissionEntryByUserId/{userId}")
     public List<EmissionEntry> getEmissionEntryByUserId(@PathVariable int userId) {
         return emissionEntryService.getEmissionEntryByUserId(userId);
     }
 
-    @PutMapping
+    @PutMapping("/updateEmissionEntry")
     public void updateEmissionEntry(@RequestBody EmissionEntry emissionEntry) {
         emissionEntryService.updateEmissionEntry(emissionEntry);
     }
