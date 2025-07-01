@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecommendationService {
@@ -78,4 +79,7 @@ public class RecommendationService {
             throw new RuntimeException("Recommendation with id " + id + " not found");
     }
 
+    public List<Recommendation> getRecommendationsByEmissionId(int emissionId) {
+        return recommendationRepository.findByEmissionEntryId(emissionId);
+    }
 }
