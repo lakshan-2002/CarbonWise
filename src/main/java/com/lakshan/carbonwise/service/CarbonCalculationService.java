@@ -30,10 +30,14 @@ public class CarbonCalculationService {
 
     public double calculateEmission(EmissionEntry emissionEntry) throws RuntimeException {
         String key = emissionEntry.getData();
-        if (emissionEntry.getType().equals("Material") && emissionEntry.getMethod() != null)
+
+        if ((emissionEntry.getType().equals("Material") || emissionEntry.getType().equals("Waste"))
+                && emissionEntry.getMethod() != null)
             key += ";" + emissionEntry.getMethod();
+
         if (emissionCategory.calculated.containsKey(key))
             return emissionCategory.calculated.get(key) * emissionEntry.getAmount();
+
         else if (emissionCategory.endpoint.contains(key)) {
             return switch (key) {
                 case "Electricity Usage" -> carbonEmissionService.calculateElectricityEmissions(
