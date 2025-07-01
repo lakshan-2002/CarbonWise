@@ -7,34 +7,38 @@ GET http://localhost:8080/users
 GET http://localhost:8080/users/2
 
 ###
-POST http://localhost:8080/users
+POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {
-  "email": "nimal123@gmail.com",
-  "password": "nimal123",
+  "name": "Mike",
+  "email": "mike@gmail.com",
+  "password": "mk457",
   "role": "employee",
   "business": {
-    "id": 1,
-    "name": "WSO2",
-    "industry": "Software",
-    "location": "Colombo"
+    "id": 3,
+    "name": "MAGA",
+    "industry": "Contruction",
+    "location": "Nawala",
+    "country": "Sri Lanka"
   }
 }
 ###
-PUT http://localhost:8080/users
+PUT http://localhost:8080/users/updateUser
 Content-Type: application/json
 
 {
-  "id": 2,
-  "email": "nimal123@gmail.com",
-  "password": "nimal123",
+  "id": 3,
+  "name": "Mike",
+  "email": "mike@gmail.com",
+  "password": "mk457",
   "role": "employee",
   "business": {
-    "id": 1,
-    "name": "WSO2",
-    "industry": "Software",
-    "location": "Colombo"
+    "id": 3,
+    "name": "MAGA",
+    "industry": "Construction",
+    "location": "Nawala",
+    "country": "Sri Lanka"
   }
 }
 ###

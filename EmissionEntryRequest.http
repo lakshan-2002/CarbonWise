@@ -3,54 +3,57 @@
 GET http://localhost:8080/emission_entries
 
 ###
-GET http://localhost:8080/emission_entries/getUserById/1
+GET http://localhost:8080/emission_entries/getEmissionEntryByUserId/3
 
 ###
-POST http://localhost:8080/emission_entries
+POST http://localhost:8080/emission_entries/addEmissionEntry
 Content-Type: application/json
 
 {
-  "type": "Transport",
-  "data": "Fuel Usage",
-  "method": "Regular Petrol",
-  "amount": 250,
-  "unit": "litre",
-  "date": "2025-06-18",
+  "type": "Waste",
+  "data": "Organic/Food",
+  "method": "Landfilled",
+  "amount": 1025,
+  "unit": "kg",
+  "date": "2025-06-20",
   "user": {
-    "id": 2,
-    "email": "nimal123@gmail.com",
-    "password": "nimal123",
+    "id": 3,
+    "name": "Mike",
+    "email": "mike@gmail.com",
+    "password": "mk457",
     "role": "employee",
     "business": {
-      "id": 1,
-      "name": "WSO2",
-      "industry": "Software",
-      "location": "Colombo",
+      "id": 3,
+      "name": "MAGA",
+      "industry": "Construction",
+      "location": "Nawala",
       "country": "Sri Lanka"
     }
   }
 }
 ###
-PUT http://localhost:8080/emission_entries
+PUT http://localhost:8080/emission_entries/updateEmissionEntry
 Content-Type: application/json
 
 {
-  "id": 7,
-  "type": "Energy",
-  "data": "Office electricity consumption",
-  "amount": 750.30,
-  "unit": "kWh",
-  "date": "2025-06-01",
+  "id": 55,
+  "type": "Waste",
+  "data": "Organic/Food",
+  "method": "Landfilled",
+  "amount": 975,
+  "unit": "kg",
+  "date": "2025-06-27",
   "user": {
-    "id": 1,
-    "email": "lakshan.imantha@gmail.com",
-    "password": "lakshan02",
+    "id": 3,
+    "name": "Mike",
+    "email": "mike@gmail.com",
+    "password": "mk457",
     "role": "employee",
     "business": {
-      "id": 1,
-      "name": "WSO2",
-      "industry": "Software",
-      "location": "Colombo",
+      "id": 3,
+      "name": "MAGA",
+      "industry": "Construction",
+      "location": "Nawala",
       "country": "Sri Lanka"
     }
   }
