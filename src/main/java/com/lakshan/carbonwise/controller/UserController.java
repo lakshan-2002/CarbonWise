@@ -26,11 +26,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user){
-        user = userService.getUserByEmail(user.getEmail());
+    public ResponseEntity<?> login(@RequestBody User inputUser){
+        User dbUser = userService.getUserByEmail(inputUser.getEmail());
 
-        if (user != null && user.getPassword().equals(user.getPassword()))
-            return ResponseEntity.ok(user);
+        if (dbUser != null && dbUser.getPassword().equals(inputUser.getPassword()))
+            return ResponseEntity.ok(dbUser);
         else
             return ResponseEntity.status(401).body("Invalid email or password");
     }
