@@ -5,6 +5,7 @@ import com.lakshan.carbonwise.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
+        user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
         userService.addNewUser(user);
     }
 
@@ -29,7 +31,7 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User inputUser){
         User dbUser = userService.getUserByEmail(inputUser.getEmail());
 
-        if (dbUser != null && dbUser.getPassword().equals(inputUser.getPassword()))
+        if (dbUser != null && dbUser.getPassword().equals(DigestUtils.sha256Hex(inputUser.getPassword())))
             return ResponseEntity.ok(dbUser);
         else
             return ResponseEntity.status(401).body("Invalid email or password");
