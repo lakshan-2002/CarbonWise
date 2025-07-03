@@ -6,6 +6,7 @@ import com.lakshan.carbonwise.entity.User;
 import com.lakshan.carbonwise.model.AiRecommendationDTO;
 import com.lakshan.carbonwise.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class RecommendationService {
         this.aiService = aiService;
     }
 
+    @Async
     public void saveRecommendations(String recommendationPrompt,
                                     User user,
                                     EmissionEntry emissionEntry) {
@@ -35,7 +37,7 @@ public class RecommendationService {
         for (var recommendationDTO : dataList) {
             addNewRecommendation(recommendationDTO, user, emissionEntry);
         }
-
+        System.out.println("Recommendations saved");
     }
 
     public void addNewRecommendation(AiRecommendationDTO aiRecommendationDTO,
