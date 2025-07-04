@@ -1,6 +1,7 @@
 package com.lakshan.carbonwise.controller;
 
 import com.lakshan.carbonwise.entity.User;
+import com.lakshan.carbonwise.service.JWTService;
 import com.lakshan.carbonwise.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -35,6 +37,21 @@ public class UserController {
             return ResponseEntity.ok(dbUser);
         else
             return ResponseEntity.status(401).body("Invalid email or password");
+    }
+
+    @PostMapping("/login2")
+    public ResponseEntity<?> login2(@RequestBody User body){
+        var user = userService.getUserByEmailPassword(body.getEmail(), body.getPassword());
+
+        if (user.isPresent()) {
+            String token = JWTService.generateToken(user.get().getEmail(), user.get().getBusiness().getName());
+            return ResponseEntity.ok(Map.of("token", token));
+        }
+        return ResponseEntity.ok("ok");
+//        if (dbUser != null && dbUser.getPassword().equals(DigestUtils.sha256Hex(inputUser.getPassword())))
+//            return ResponseEntity.ok(dbUser);
+//        else
+//            return ResponseEntity.status(401).body("Invalid email or password");
     }
 
     @GetMapping("{id}")
