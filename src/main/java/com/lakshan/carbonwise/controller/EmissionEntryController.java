@@ -24,8 +24,11 @@ public class EmissionEntryController {
     }
 
     @PostMapping("/addEmissionEntry")
-    public void addEmissionEntry(@RequestBody EmissionEntry emissionEntry) {
+    @AuthRequired
+    public ResponseEntity<?> addEmissionEntry(@RequestBody EmissionEntry emissionEntry, @CurrentUser User user) {
+        emissionEntry.setUser(user);
         emissionEntryService.addNewEmissionEntry(emissionEntry);
+        return ResponseEntity.status(201).body("Successfully added");
     }
 
 //    @GetMapping
