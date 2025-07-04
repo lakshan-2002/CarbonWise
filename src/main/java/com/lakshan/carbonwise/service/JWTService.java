@@ -21,7 +21,7 @@ public class JWTService {
         secretKey = secretFromProperties;
     }
 
-    public static String generateToken(String email, String name, String business) {
+    public String generateToken(String email, String name, String business) {
         long expirationMillis = 24 * 60 * 60 * 1000; // 1 day
         return Jwts.builder()
                 .claim("email", email)
