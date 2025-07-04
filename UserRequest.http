@@ -6,23 +6,37 @@ GET http://localhost:8080/users
 ###
 GET http://localhost:8080/users/2
 
+
+###
+GET http://localhost:8080/users/test
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiYnVzaW5lc3MiOiJNQUdBIiwiaWF0IjoxNzUxNjI0NjQzLCJleHAiOjE3NTE3MTEwNDN9.bwYq1g866ScIU_xriKx_FDjMqCVcg_8B7uSPX0poERg
+
+###
+POST http://localhost:8080/users/addUser
+Content-Type: application/json
+
+{
+  "name": "James",
+  "email": "james@gmail.com",
+  "password": "jms531",
+  "business": {
+    "id": 4,
+    "name": "Codegen International",
+    "industry": "Software",
+    "location": "Colombo",
+    "country": "Sri Lanka"
+  }
+}
+
 ###
 POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {
-  "name": "Mike",
-  "email": "mike@gmail.com",
-  "password": "mk457",
-  "role": "employee",
-  "business": {
-    "id": 3,
-    "name": "MAGA",
-    "industry": "Contruction",
-    "location": "Nawala",
-    "country": "Sri Lanka"
-  }
+  "email": "james@gmail.com",
+  "password": "jms531"
 }
+
 ###
 PUT http://localhost:8080/users/updateUser
 Content-Type: application/json
