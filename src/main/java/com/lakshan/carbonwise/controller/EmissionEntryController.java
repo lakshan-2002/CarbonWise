@@ -31,10 +31,10 @@ public class EmissionEntryController {
         return ResponseEntity.status(201).body("Successfully added");
     }
 
-//    @GetMapping
-//    public List<EmissionEntry> getEmissionEntries() {
-//        return emissionEntryService.getAllEmissionEntries();
-//    }
+    @GetMapping("/getAllEmissionEntries")
+    public List<EmissionEntry> getEmissionEntries() {
+        return emissionEntryService.getAllEmissionEntries();
+    }
 
     @AuthRequired
     @GetMapping("{id}")
