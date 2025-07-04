@@ -84,4 +84,8 @@ public class RecommendationService {
     public List<Recommendation> getRecommendationsByEmissionId(int emissionId) {
         return recommendationRepository.findByEmissionEntryId(emissionId);
     }
+
+    public List<Recommendation> getRecommendationByUserId(int userId) {
+        return recommendationRepository.findByUserId(userId);
+    }
 }
