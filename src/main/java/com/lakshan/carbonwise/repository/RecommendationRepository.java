@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Integer> {
       List<Recommendation> findByEmissionEntryId(int emissionId);
 
+      List<Recommendation> findByUserId(int userId);
 }

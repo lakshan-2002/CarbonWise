@@ -36,4 +36,9 @@ public class RecommendationController {
     public List<Recommendation> getRecommendationsByEmissionId(@PathVariable int emissionId) {
         return recommendationService.getRecommendationsByEmissionId(emissionId);
     }
+
+    @GetMapping("/getRecommendationsByUserId/{userId}")
+    public List<Recommendation> getRecommendationsByUserId(@PathVariable int userId) {
+        return recommendationService.getRecommendationByUserId(userId);
+    }
 }
