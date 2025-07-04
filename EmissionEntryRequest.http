@@ -1,35 +1,26 @@
 ### GET request to example server
 // EmissionEntry Entity
-GET http://localhost:8080/emission_entries
+GET http://localhost:8080/emission_entries/55
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiYnVzaW5lc3MiOiJNQUdBIiwiaWF0IjoxNzUxNjI0NjQzLCJleHAiOjE3NTE3MTEwNDN9.bwYq1g866ScIU_xriKx_FDjMqCVcg_8B7uSPX0poERg
 
 ###
-GET http://localhost:8080/emission_entries/getEmissionEntryByUserId/3
+GET http://localhost:8080/emission_entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pa2VAZ21haWwuY29tIiwiYnVzaW5lc3MiOiJNQUdBIiwiaWF0IjoxNzUxNjI0NjQzLCJleHAiOjE3NTE3MTEwNDN9.bwYq1g866ScIU_xriKx_FDjMqCVcg_8B7uSPX0poERg
+
+###
+GET http://localhost:8080/emission_entries/getAllEmissionEntries
 
 ###
 POST http://localhost:8080/emission_entries/addEmissionEntry
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImphbWVzQGdtYWlsLmNvbSIsIm5hbWUiOiJKYW1lcyIsImJ1c2luZXNzIjoiQ29kZWdlbiBJbnRlcm5hdGlvbmFsIiwiaWF0IjoxNzUxNjQ0MTM0LCJleHAiOjE3NTE3MzA1MzR9.P5YammdRDJnh9HhM0kmgb8guZpt5jOop7VgXuDm_-Vo
 
 {
-  "type": "Waste",
-  "data": "Organic/Food",
-  "method": "Landfilled",
-  "amount": 1025,
-  "unit": "kg",
-  "date": "2025-06-20",
-  "user": {
-    "id": 3,
-    "name": "Mike",
-    "email": "mike@gmail.com",
-    "password": "mk457",
-    "role": "employee",
-    "business": {
-      "id": 3,
-      "name": "MAGA",
-      "industry": "Construction",
-      "location": "Nawala",
-      "country": "Sri Lanka"
-    }
-  }
+  "type": "Water",
+  "data": "Groundwater",
+  "amount": 1075,
+  "unit": "m^3",
+  "date": "2025-05-30"
 }
 ###
 PUT http://localhost:8080/emission_entries/updateEmissionEntry
