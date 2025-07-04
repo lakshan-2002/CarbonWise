@@ -19,10 +19,12 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final JWTService jwtService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JWTService jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/addUser")
@@ -46,7 +48,7 @@ public class UserController {
         var user = userService.getUserByEmailPassword(body.getEmail(), body.getPassword());
 
         if (user != null) {
-            String token = JWTService.generateToken(user.getEmail(), user.getName(), user.getBusiness().getName());
+            String token = jwtService.generateToken(user.getEmail(), user.getName(), user.getBusiness().getName());
             return ResponseEntity.ok(Map.of("token", token));
         }
         return ResponseEntity.status(401).body("Login failed");
