@@ -31,34 +31,29 @@ public class UserController {
         userService.addNewUser(user);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User inputUser){
-        User dbUser = userService.getUserByEmail(inputUser.getEmail());
-
-        if (dbUser != null && dbUser.getPassword().equals(DigestUtils.sha256Hex(inputUser.getPassword())))
-            return ResponseEntity.ok(dbUser);
-        else
-            return ResponseEntity.status(401).body("Invalid email or password");
-    }
-
-    @PostMapping("/login2")
-    public ResponseEntity<?> login2(@RequestBody User body){
-        var user = userService.getUserByEmailPassword(body.getEmail(), body.getPassword());
-
-        if (user.isPresent()) {
-            String token = JWTService.generateToken(user.get().getEmail(), user.get().getBusiness().getName());
-            return ResponseEntity.ok(Map.of("token", token));
-        }
-        return ResponseEntity.ok("ok");
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody User inputUser){
+//        User dbUser = userService.getUserByEmail(inputUser.getEmail());
+//
 //        if (dbUser != null && dbUser.getPassword().equals(DigestUtils.sha256Hex(inputUser.getPassword())))
 //            return ResponseEntity.ok(dbUser);
 //        else
 //            return ResponseEntity.status(401).body("Invalid email or password");
-    }
+//    }
 
-    @GetMapping("{id}")
-    public User getUserById(@PathVariable int id) {
-        return userService.getUser(id);
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User body){
+        var user = userService.getUserByEmailPassword(body.getEmail(), body.getPassword());
+
+        if (user != null) {
+            String token = JWTService.generateToken(user.getEmail(), user.getName(), user.getBusiness().getName());
+            return ResponseEntity.ok(Map.of("token", token));
+        }
+        return ResponseEntity.status(401).body("Login failed");
+//        if (dbUser != null && dbUser.getPassword().equals(DigestUtils.sha256Hex(inputUser.getPassword())))
+//            return ResponseEntity.ok(dbUser);
+//        else
+//            return ResponseEntity.status(401).body("Invalid email or password");
     }
 
 //    @GetMapping("{email}")
