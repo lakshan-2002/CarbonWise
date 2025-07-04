@@ -1,8 +1,12 @@
 package com.lakshan.carbonwise.controller;
 
+import com.lakshan.carbonwise.annotation.AuthRequired;
+import com.lakshan.carbonwise.annotation.CurrentUser;
 import com.lakshan.carbonwise.entity.EmissionEntry;
+import com.lakshan.carbonwise.entity.User;
 import com.lakshan.carbonwise.service.EmissionEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,19 +28,25 @@ public class EmissionEntryController {
         emissionEntryService.addNewEmissionEntry(emissionEntry);
     }
 
-    @GetMapping
-    public List<EmissionEntry> getEmissionEntries() {
-        return emissionEntryService.getAllEmissionEntries();
-    }
+//    @GetMapping
+//    public List<EmissionEntry> getEmissionEntries() {
+//        return emissionEntryService.getAllEmissionEntries();
+//    }
 
+    @AuthRequired
     @GetMapping("{id}")
-    public EmissionEntry getEmissionEntry(@PathVariable int id) {
-        return emissionEntryService.getEmissionEntryById(id);
+    public ResponseEntity<?> getEmissionEntry(@PathVariable int id, @CurrentUser User user) {
+        var emissionEntry = emissionEntryService.getEmissionEntryById(id);
+        if (emissionEntry.getUser().getId() == user.getId()) {
+            return ResponseEntity.ok(emissionEntry);
+        }
+        return ResponseEntity.status(401).body("Unauthorized Access");
     }
 
-    @GetMapping("/getEmissionEntryByUserId/{userId}")
-    public List<EmissionEntry> getEmissionEntryByUserId(@PathVariable int userId) {
-        return emissionEntryService.getEmissionEntryByUserId(userId);
+    @AuthRequired
+    @GetMapping
+    public List<EmissionEntry> getEmissionEntryByUserId(@CurrentUser User user) {
+        return emissionEntryService.getEmissionEntryByUserId(user.getId());
     }
 
     @PutMapping("/updateEmissionEntry")

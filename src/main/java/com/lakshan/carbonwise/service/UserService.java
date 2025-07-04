@@ -2,6 +2,7 @@ package com.lakshan.carbonwise.service;
 
 import com.lakshan.carbonwise.entity.User;
 import com.lakshan.carbonwise.repository.UserRepository;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +35,8 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> getUserByEmailPassword(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+    public User getUserByEmailPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, DigestUtils.sha256Hex(password));
     }
 
     public void updateUser(User user) {
