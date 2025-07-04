@@ -1,5 +1,6 @@
 package com.lakshan.carbonwise.controller;
 
+import com.lakshan.carbonwise.annotation.CurrentUser;
 import com.lakshan.carbonwise.entity.User;
 import com.lakshan.carbonwise.service.JWTService;
 import com.lakshan.carbonwise.service.UserService;
@@ -55,7 +56,14 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User getUserById(@PathVariable int id) {
+    public User getUserById(@PathVariable int id, @CurrentUser User user) {
+
+        if(user!= null) {
+            System.out.println("Current user: " + user.getName());
+        } else {
+            System.out.println("No current user found");
+        }
+
         return userService.getUser(id);
     }
 

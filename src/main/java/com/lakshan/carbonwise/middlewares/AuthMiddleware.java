@@ -29,7 +29,6 @@ public class AuthMiddleware implements Filter {
             String email = JWTService.getUserFromToken(token);
             User user = userService.getUserByEmail(email);
             request.setAttribute("user", user);
-            System.out.println(user.getName());
         }
 
         chain.doFilter(request, response);
