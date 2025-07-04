@@ -7,6 +7,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,7 @@ public class AuthMiddleware implements Filter {
 
     private final UserService userService;
 
+    @Autowired
     public AuthMiddleware(UserService userService) {
         this.userService = userService;
     }
